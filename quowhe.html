@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #d8d2cd;
+            width: 100%;
+            display: block;
+        }
+
+        /* !Lenis */
+
+        html.lenis, html.lenis body {
+            height: auto;
+        }
+
+        .lenis.lenis-smooth {
+            scroll-behavior: auto !important;
+        }
+
+        .lenis.lenis-smooth [data-lenis-prevent] {
+            overscroll-behavior: contain;
+        }
+
+        .lenis.lenis-stopped {
+            overflow: hidden;
+        }
+
+        .lenis.lenis-scrolling iframe {
+            pointer-events: none;
+        }
+
+        /* Grid */
+
+        .grid {
+            width: 100%;
+            position: relative;
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+        }
+
+        .boxes:nth-child(1) {
+            grid-row: 1;
+
+            img {
+                transform-origin: top left;
+            }
+        }
+
+        .boxes:nth-child(2) {
+            grid-column: 4 ;
+
+            img {
+                transform-origin: top left;
+            }
+        }
+
+        .boxes:nth-child(3) {
+            grid-column: 5;
+            grid-row: 2;
+
+            img {
+                transform-origin: bottom left;
+            }
+        }
+
+        .boxes:nth-child(4) {
+            grid-column: 8;
+            grid-row: 2;
+
+            img {
+                transform-origin: top right;
+            }
+        }
+
+        .boxes:nth-child(5) {
+            grid-column: 3;
+            grid-row: 3;
+
+            img {
+                transform-origin: top right;
+            }
+        }
+        
+        .boxes:nth-child(6) {
+            grid-column: 7;
+            grid-row: 4;
+
+            img {
+                transform-origin: bottom left;
+            }
+        }
+
+        .boxes:nth-child(7) {
+            grid-column: 8;
+            grid-row: 5;
+
+            img {
+                transform-origin: bottom left;
+            }
+        }
+
+        .boxes:nth-child(8) {
+            grid-column: 2;
+            grid-row: 6;
+
+            img {
+                transform-origin: top right;
+            }
+        }
+
+        .boxes:nth-child(9) {
+            grid-column: 3;
+            grid-row: 7;
+
+            img {
+                transform-origin: bottom left;
+            }
+        }
+
+        .boxes:nth-child(10) {
+            grid-column: 7;
+            grid-row: 8;
+
+            img {
+                transform-origin: bottom right;
+            }
+        }
+
+        .boxes:nth-child(12) {
+            grid-column: 1;
+            grid-row: 9;
+
+            img {
+                transform-origin: bottom right;
+            }
+        }
+
+        .boxes:nth-child(11) {
+            grid-column: 6;
+            grid-row: 9;
+
+            img {
+                transform-origin: bottom right;
+            }
+        }
+
+        .boxes:nth-child(13) {
+            grid-column: 4;
+            grid-row: 10;
+
+            img {
+                transform-origin: bottom right;
+            }
+        }
+
+        .boxes:nth-child(14) {
+            grid-column: 2;
+            grid-row: 11;
+
+            img {
+                transform-origin: bottom right;
+            }
+        }
+
+        .boxes:nth-child(15) {
+            grid-column: 6;
+            grid-row: 12;
+
+            img {
+                transform-origin: bottom left;
+            }
+        }
+
+        .boxes:nth-child(16) {
+            grid-column: 3;
+            grid-row: 14;
+
+            img {
+                transform-origin: bottom left;
+            }
+        }
+
+        .boxes:nth-child(17) {
+            grid-column: 5;
+            grid-row: 15;
+
+            img {
+                transform-origin: bottom left;
+            }
+        }
+
+        .boxes:nth-child(18) {
+            grid-column: 1;
+            grid-row: 16;
+
+            img {
+                transform-origin: bottom right;
+            }
+        }
+
+        .boxes:nth-child(19) {
+            grid-column: 2;
+            grid-row: 17;
+
+            img {
+                transform-origin: bottom right;
+            }
+        }
+        
+        .boxes {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        img {
+            position: relative;
+            height: auto;
+            aspect-ratio: 1;
+            width: 100%;
+            object-fit: cover;
+            display: block;
+            will-change: transform;
+        }
+
+        /* FRAME */
+
+        p {
+            font-family: "Neue Montreal";
+            font-size: 1.2rem;
+            color: rgb(0, 0, 0);
+            text-transform: uppercase;
+        }
+
+        .cover__title {
+            margin: 0;
+            font-size: 8vw;
+            font-weight: 600;
+            font-family: "Neue Montreal";
+            text-transform: uppercase;
+            letter-spacing: .025em;
+        }
+
+        .cover__subtitles {
+            margin: 0;
+            font-size: 1.5rem;
+            font-weight: 400;
+        }
+
+        sup {
+            font-size: 4vw;
+            font-weight: 700;
+        }
+
+        ul {
+            text-decoration: none;
+        }
+
+        li {
+            font-family: "Neue Montreal";
+            text-decoration: none;
+            list-style: none;
+            color: red;
+            font-size: 1.2rem;
+        }
+
+        .frame {
+            position: relative;
+            width: 100%;
+            padding: 1rem;
+            position: fixed;
+            top: 0;
+            left: 0;
+            align-content: space-between;
+            
+            z-index: 1000;
+            display: grid;
+            
+
+            .prev-demo {
+                display: flex;
+                justify-content: flex-start;
+                grid-area: prev;
+                
+                p {
+                    color: rgb(143, 37, 37);
+                }
+                
+            }
+
+            .divi {
+                grid-area: sponsor;
+                justify-self: end;
+            }
+
+            .grid-scroll-bottom {
+                grid-area: title;
+            }
+            
+            .more-demos {
+                grid-area: demo;
+                display: flex;
+                justify-self: end;
+                gap: 1rem;
+
+                ul {
+                    display: flex;
+                    gap: 1rem;
+                }
+            }
+        }
+
+        @media screen and (min-width: 53em) {
+            .frame {
+                height: 100vh;
+                grid-template:
+                "prev sponsor"
+                ". ." 1fr
+                "title demo" / auto 1fr 
+                ;
+            }
+        }
+
+        .cover {
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            pointer-events: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+
+
+        
+    </style>
+</head>
+<body>
+
+    <main>
+        <div class="frame">
+                <div class="prev-demo">
+                    <p>Previous Demo</p>
+                </div>
+                <div class="divi">
+                    <p>DIVI AI: Demand content creation, code, writing,
+                        & image generation
+                    </p>
+                </div>
+                <div class="grid-scroll-bottom">
+                    <p>Grid Scroll Animation</p>
+                </div>
+                <div class="more-demos">
+                    <p>MORE Demos:</p>
+                    <ul>
+                        <li>1</li>
+                        <li>2</li>
+                        <li>3</li>
+                        <li>4</li>
+                        <li>5</li>
+                        <li>6</li>
+                        <li>7</li>
+                        <li>8</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <div class="grid"></div>
+            <div class="cover">
+                <h2 class="cover__title">Thomas Vance<sup>®</sup></h2>
+                <h3 class="cover__subtitles">並外れたファッション</h3>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script>
+        const grid = document.querySelector(".grid")
+        gsap.registerPlugin(ScrollTrigger);
+        
+
+        const images = [
+        {
+            imageZ: "/Awwwards\ Websites/11-Unsplash/1.jpg"
+        },
+        {
+            imageZ: "/Awwwards\ Websites/11-Unsplash/2.jpg"
+        },
+        {
+            imageZ: "/Awwwards\ Websites/11-Unsplash/3.jpg"
+        },
+        {
+            imageZ: "/Awwwards\ Websites/11-Unsplash/4.jpg"
+        },
+        {
+            imageZ: "/Awwwards\ Websites/11-Unsplash/5.jpg"
+        },
+        {
+            imageZ: "/Awwwards\ Websites/11-Unsplash/6.jpg"
+        },
+        {
+            imageZ: "/Awwwards\ Websites/11-Unsplash/7.jpg"
+        },
+        {
+            imageZ: "/Awwwards\ Websites/11-Unsplash/8.jpg"
+        },
+        {
+            imageZ: "/Awwwards\ Websites/11-Unsplash/9.jpg"
+        },
+        {
+            imageZ: "/Awwwards\ Websites/11-Unsplash/10.jpg"
+        },
+        {
+            imageZ: "/Awwwards\ Websites/11-Unsplash/11.jpg"
+        },
+        {
+            imageZ: "/Awwwards\ Websites/11-Unsplash/12.jpg"
+        },
+        {
+            imageZ: "/Awwwards\ Websites/11-Unsplash/13.jpg"
+        },
+        {
+            imageZ: "/Awwwards\ Websites/11-Unsplash/14.jpg"
+        },
+        {
+            imageZ: "/Awwwards\ Websites/11-Unsplash/15.jpg"
+        },
+        {
+            imageZ: "/Awwwards\ Websites/11-Unsplash/16.jpg"
+        },
+        {
+            imageZ: "/Awwwards\ Websites/11-Unsplash/17.jpg"
+        },
+        {
+            imageZ: "/Awwwards\ Websites/11-Unsplash/18.jpg"
+        },
+        ]
+
+        const gridBoxes = document.querySelectorAll(".boxes")
+
+        images.forEach((image, index) => {
+            let gridBoxes = document.createElement("div")
+            gridBoxes.classList.add("boxes")
+            
+
+            let gridImages = document.createElement("img")
+            gridImages.classList.add("grid__image")
+             gridImages.style.position = "sticky"
+            // gridImages.style.top = "0"
+            gridImages.id = index
+            gridImages.src = image.imageZ
+
+            gridBoxes.append(gridImages)
+
+            document.querySelector(".grid").append(gridBoxes)
+        })
+
+        const initLenis = () => {
+            let lenis = new Lenis ({
+                lerp: 0.064,
+                smoothWheel: true,
+            })
+
+            lenis.on("scroll", ScrollTrigger.update)
+            gsap.ticker.add((time) => lenis.raf(time * 900));
+            gsap.ticker.lagSmoothing[0]
+        }
+
+        const gridTopImages = document.querySelectorAll("img")
+
+        function animateGridImages () {
+            gridTopImages.forEach((box) => {
+                gsap.fromTo(box,
+                    { scale: 1 },
+                    {
+                        
+                        scale: 0,
+                        scrollTrigger: {
+                            trigger: box,
+                            start: "top top",
+                            end: "bottom top",
+                            toggleActions: "play none none none",
+                            pin: true,
+                            pinSpacing: false,
+                            scrub: true, 
+                            // markers: true,
+                        }
+                    }
+                );
+            })
+        }  
+
+        animateGridImages()
+
+
+
+        
+
+        window.addEventListener("DOMContentLoaded", () => {
+            initLenis()
+        })
+    </script>
+</body>
+</html>
